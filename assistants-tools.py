@@ -204,4 +204,4 @@ if __name__ == '__main__':
     # process_message("根据我提供的CSV文件，我有投资哪些股票？数量和价格是多少？", client, thread)
     # process_message("查找股票的当前价格，计算每只股票的总价值，和我的投资总价值，用表格形式展示", client, thread)
     # process_message("用图表展示我的投资已经实现的收益和损失情况", client, thread)
-    popup_show_image()
+    popup_show_image("d:\\temp\\invest.PNG")
