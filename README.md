@@ -2,7 +2,7 @@
 <!-- files description in table -->
 | File Name | Description |
 | --- | --- |
-| `assistants-tools.py` | Assistants to use function calling and code intepretor |
+| `assistants-tools.py` | Assistants to use function calling and code interpreter |
 | `functioncall-BingSearch.py` | Function calling with Azure Bing Search |
 | `utility.py` | Utility functions for the application |
 | `requirements.txt` | Required packages for the application |
