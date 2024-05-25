@@ -11,7 +11,7 @@ def show_image(image_path: str):
     popup = tk.Toplevel()
     popup.title("Image")
 
-    image = Image.open(str)
+    image = Image.open(image_path)
     photo = ImageTk.PhotoImage(image)
     label = tk.Label(popup, image=photo)
     label.pack()
@@ -23,6 +23,6 @@ def popup_show_image(image_path: str):
     # 创建一个按钮，点击按钮后调用show_image函数
     # button = tk.Button(root, text="Show Image", command=show_image)
     # button.pack()
-    show_image(str)
+    show_image(image_path)
 
     root.mainloop()
