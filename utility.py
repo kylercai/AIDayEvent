@@ -2,6 +2,7 @@ from PIL import Image, ImageTk
 import tkinter as tk
 
 #提示用户在终端输入，输入的内容是一个字符串，返回输入的字符串
+# Prompt the user to input in the terminal, the input is a string, and return the input string
 def get_input():
     print(">>>:")
     return input()

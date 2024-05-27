@@ -16,6 +16,7 @@ bing_search_subscription_key = os.getenv("AZURE_BINGSEARCH_KEY")
 bing_search_url = "https://api.bing.microsoft.com/v7.0/search"
 
 #定义函数，实现对bing搜索的调用
+# Define a function to call Bing search
 def search(query: str) -> list:
     """
     Perform a bing search against the given query
@@ -38,11 +39,14 @@ def search(query: str) -> list:
     return json.dumps(output)
 
 #定义消息列表，第一个消息是系统消息
+# Define a message list, the first message is a system message
 messages = [{"role": "system", "content": "You are an AI assistant that helps people find information. If you don't know the answer, you can say 'I don't know'."}]
 
 #通过AOAI和function calling tool调用bing搜索，对用户的问题生成回答
+# Call Bing search through AOAI and function calling tool to generate answers to user questions
 def generateAnswer(question) -> any:
     # Step 1: 定义模型可以使用的function tool
+    # Define the function tools that the model can use
     available_functions = {"search_bing": search}
     tools = [
         {
@@ -65,6 +69,7 @@ def generateAnswer(question) -> any:
     ]
 
     # Step 2: 把用户问题加入到消息列表中，把消息列表和tools传递给模型，获取模型返回的tools调用信息，把tools调用信息加入到消息列表中
+    # Add the user question to the message list, pass the message list and tools to the model, get the tools call information returned by the model, and add the tools call information to the message list
     message={"role": "user", "content": question}
     messages.append(message)
     response = client.chat.completions.create(
@@ -77,6 +82,7 @@ def generateAnswer(question) -> any:
     messages.append(response_message)
 
     # Step 3: 检查模型是否需要调用functions，如果需要，逐个调用functions，把functions的返回信息加入到消息列表中
+    # Check if the model needs to call functions. If so, call the functions one by one and add the return information of the functions to the message list
     tool_calls = response_message.tool_calls
     second_response=None
     if tool_calls:
@@ -97,6 +103,7 @@ def generateAnswer(question) -> any:
 
 
         # Step 4: 把消息列表传递给模型（包括系统提示，用户问题，模型的tools调用信息，各个function tool的调用结果），模型基于所有信息做内容生成
+        # Pass the message list to the model (including system prompts, user questions, model tools call information, and the call results of each function tool), and the model generates content based on all information
         second_response = client.chat.completions.create(
             model=aoai_deployment,
             messages=messages,
@@ -108,9 +115,11 @@ def generateAnswer(question) -> any:
 if __name__ == '__main__':
     print("-" * 80)
     #获取用户输入的问题
+    # Get the user input question
     question=get_input()
 
     #循环响应用户的问题，直到用户输入“bye”，退出循环
+    # Respond to the user's question in a loop until the user enters "bye" to exit the loop
     while question != "bye":
         response = generateAnswer(question)
         #if response is not None:
