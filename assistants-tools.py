@@ -5,6 +5,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Iterable
 from openai import AzureOpenAI
+from openai.types.beta.assistants import Assistant
 from openai.types.beta import Thread
 from openai.types.beta.threads import Run
 from openai.types.beta.threads.messages import MessageFile
@@ -176,6 +177,11 @@ tools_list = [
         },
     }
 ]
+
+def cleanup(client: AzureOpenAI, assistant: Assistant, thread: Thread, file: FileObject) -> None:
+    client.beta.assistants.delete(assistant.id)
+    client.beta.threads.delete(thread.id)
+    client.files.delete(file.id)    
 
 if __name__ == '__main__':
     # create the Azure OpenAI client
