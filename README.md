@@ -4,6 +4,7 @@
 | --- | --- |
 | `assistants-tools.py` | Assistants to use function calling and code interpreter |
 | `functioncall-BingSearch.py` | Function calling with Azure Bing Search |
+| `twoagent.py` | AutoGen sample |
 | `utility.py` | Utility functions for the application |
 | `requirements.txt` | Required packages for the application |
 | `.env-sample` | Sample environment file |
