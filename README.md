@@ -16,3 +16,4 @@
 ## Prerequisites
 - pip install -r requirements.txt
 - rename .env-sample to .env, and fill in the required fields
+- **Internet connection for calling Bing Search API, yfinance API**
